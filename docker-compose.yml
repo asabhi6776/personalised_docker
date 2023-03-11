@@ -1,0 +1,17 @@
+version: '3'
+services:
+  work-image:
+    container_name: work-image
+    image: asabhi6776/alpine-custom:10 # Custom image name will be changed in future.
+    pull_policy: always
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+    privileged: false
+    environment:
+      - AWS_ACCESS_KEY_ID=admin
+      - AWS_SECRET_ACCESS_KEY=password
+      - ENDPOINT=http://url
