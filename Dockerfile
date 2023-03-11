@@ -13,6 +13,8 @@ RUN curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -
     && curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 \
     && chmod +x get_helm.sh && ./get_helm.sh
 
+######## Installing rclone ############
+RUN curl https://rclone.org/install.sh | bash
 
 ######## Sudo configuration ###########
 RUN set -ex && apk --no-cache add sudo
@@ -33,4 +35,4 @@ RUN sed -i '/^plugins=/ s/)$/ git tmux common-aliases zsh-syntax-highlighting js
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 WORKDIR /home/abhishek
-ENTRYPOINT [ "zsh" ]
+ENTRYPOINT [ "/bin/bash", "script.sh" ]

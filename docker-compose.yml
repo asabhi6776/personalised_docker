@@ -11,3 +11,7 @@ services:
           cpus: '2'
           memory: 2G
     privileged: false
+    environment:
+      - AWS_ACCESS_KEY_ID=admin
+      - AWS_SECRET_ACCESS_KEY=password
+      - ENDPOINT=http://url
