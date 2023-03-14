@@ -5,7 +5,7 @@ LABEL maintainer="github.com/asabhi6776"
 RUN adduser abhishek;echo 'abhishek:password' | chpasswd
 
 ######### Installing required packages and Kube ##########
-RUN apk add curl wget zsh openssl bash git tmux --no-cache
+RUN apk add curl wget zsh openssl bash git tmux unzip --no-cache
 
 RUN curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl" \
     && chmod +x ./kubectl \
