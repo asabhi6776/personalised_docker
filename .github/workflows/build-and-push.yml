@@ -1,0 +1,47 @@
+name: Docker Build and Push
+
+on:
+  push:
+    branches:
+      - master
+      - staging
+      - dev
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        run: |
+          echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+        env:
+          DOCKER_CLI_AK environment
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and Push Docker Image
+        id: build
+        run: |
+          IMAGE_TAG=latest
+          docker build -t asabhi6776/personalized_docker_image:$IMAGE_TAG .
+          docker push asabhi6776/personalized_docker_image:$IMAGE_TAG
+          echo "::set-output name=image_tag::$IMAGE_TAG" # Set an output variable
+
+        working-directory: ./
+
+      - name: Get Commit Message
+        id: commit_message
+        run: echo "Commit Message: ${{ github.event.head_commit.message }}"
+        
+      - name: Notify Discord on Success
+        if: success()
+        run: |
+          curl -X POST -H "Content-Type: application/json" -d '{
+            "content": "Docker image build and push to Docker Hub successful!\nCommit Message: ${{ steps.commit_message.outputs.commit_message }}\nImage Tag: ${{ steps.build.outputs.image_tag }}"
+          }' ${{ secrets.DISCORD_WEBHOOK_URL }}
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
