@@ -36,7 +36,7 @@ RUN adduser abhishek wheel
 RUN sed -i -e "s/bin\/ash/bin\/zsh/" /etc/passwd
 USER abhishek
 RUN sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-RUN sed -i 's/_THEME="robbyrussell"/_THEME="agnoster"/g' ~/.zshrc
+RUN sed -i 's/_THEME=\"robbyrussell\"/_THEME=\"agnoster\"/g' ~/.zshrc
 RUN sed -i '/^plugins=/ s/)$/ git tmux common-aliases zsh-syntax-highlighting jsontools)/' ~/.zshrc
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
