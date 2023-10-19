@@ -35,4 +35,5 @@ RUN sed -i '/^plugins=/ s/)$/ git tmux common-aliases zsh-syntax-highlighting js
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 WORKDIR /home/abhishek
+COPY assets/script.sh script.sh
 ENTRYPOINT [ "/bin/bash", "script.sh" ]
