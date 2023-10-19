@@ -20,17 +20,13 @@ LABEL maintainer="github.com/asabhi6776"
 RUN adduser abhishek; echo 'abhishek:password' | chpasswd
 
 # Installing required packages
-RUN apk add --no-cache zsh sudo
+RUN apk add --no-cache zsh sudo git curl wget
 
 # Copy required binaries from the builder stage
 COPY --from=builder /usr/local/bin/kubectl /usr/local/bin/kubectl
 COPY --from=builder /usr/local/bin/helm /usr/local/bin/helm
 COPY --from=builder /usr/local/bin/helm /usr/local/bin/helm
 COPY --from=builder /usr/bin/rclone /usr/bin/rclone
-
-# install required things
-
-RUN apk add curl git wget -y
 
 # Sudo configuration
 RUN echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel
