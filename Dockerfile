@@ -33,7 +33,7 @@ RUN echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel
 RUN adduser abhishek wheel
 
 # Zsh configuration
-RUN sed -i -e "s/bin/ash/bin/zsh/" /etc/passwd
+RUN sed -i -e "s/bin\/ash/bin\/zsh/" /etc/passwd
 USER abhishek
 RUN sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 RUN sed -i 's/_THEME="robbyrussell"/_THEME="agnoster"/g' ~/.zshrc
