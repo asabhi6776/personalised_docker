@@ -28,6 +28,10 @@ COPY --from=builder /usr/local/bin/helm /usr/local/bin/helm
 COPY --from=builder /usr/local/bin/helm /usr/local/bin/helm
 COPY --from=builder /usr/bin/rclone /usr/bin/rclone
 
+# install required things
+
+RUN apk add curl git wget -y
+
 # Sudo configuration
 RUN echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel
 RUN adduser abhishek wheel
