@@ -25,7 +25,6 @@ RUN apk add --no-cache zsh sudo git curl wget
 # Copy required binaries from the builder stage
 COPY --from=builder /usr/local/bin/kubectl /usr/local/bin/kubectl
 COPY --from=builder /usr/local/bin/helm /usr/local/bin/helm
-COPY --from=builder /usr/local/bin/helm /usr/local/bin/helm
 COPY --from=builder /usr/bin/rclone /usr/bin/rclone
 
 # Sudo configuration
