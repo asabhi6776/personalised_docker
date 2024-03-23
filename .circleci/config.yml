@@ -28,7 +28,7 @@ jobs:
           command: |
             DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --push --platform linux/arm64/v8,linux/amd64 -t asabhi6776/work_image:"multiarch_"$CIRCLE_BRANCH"_"$CIRCLE_BUILD_NUM -t asabhi6776/work_image:latest .
 workflows:
-  version: 2.1
+  version: 2
   build-and-push-multi-arch-image:
     jobs:
       - build
