@@ -24,6 +24,8 @@ RUN adduser abhishek wheel
 # RUN echo "venom-alpine" > /etc/hostname
 # RUN hostname venom-alpine
 
+#TODO revive the project
+
 ######## Zsh configuration ############
 RUN sed -i -e "s/bin\/ash/bin\/zsh/" /etc/passwd
 
